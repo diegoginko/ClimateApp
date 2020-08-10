@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.diegoginko.climapp.utilities.ConverterKt" />
+        <variable
+            name="ciudad"
+            type="com.diegoginko.climapp.data.Ciudad" />
+        <variable
+            name="clickListener"
+            type="com.diegoginko.climapp.adapter.CiudadClickListener" />
+        <variable
+            name="longClickListener"
+            type="com.diegoginko.climapp.adapter.CiudadLongClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCiudadItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:onLongClick="@{() -> longClickListener.onClick(ciudad)}"
+        android:onClick="@{() -> clickListener.onClick(ciudad)}">
+
+        <TextView
+            android:id="@+id/txtNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20sp"
+            android:text="@{ciudad.nombre}"/>
+
+        <ImageView
+            android:id="@+id/imgClima"
+            android:layout_width="0dp"
+            android:layout_height="170dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="@+id/txtNombre"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:imageUrl="@{ConverterKt.iconToUri(ciudad.iconoClima)}"/>
+        <TextView
+            android:id="@+id/txtDescipcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/imgClima"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imgClima"
+            app:layout_constraintEnd_toEndOf="@+id/imgClima"
+            android:text="@{ciudad.descripcionClima}"/>
+
+        <TextView
+            android:id="@+id/txtTempTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/imgClima"
+            app:layout_constraintStart_toEndOf="@+id/imgClima"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Temperatura"/>
+
+        <TextView
+            android:id="@+id/txtLabelTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTempTitulo"
+            app:layout_constraintStart_toEndOf="@+id/imgClima"
+            app:layout_constraintEnd_toStartOf="@+id/txtTemp"
+            android:text="Actual: "/>
+        <TextView
+            android:id="@+id/txtTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTempTitulo"
+            app:layout_constraintStart_toEndOf="@+id/txtLabelTemp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{ConverterKt.doubleToString(ciudad.temp)}"/>
+        <TextView
+            android:id="@+id/txtTempMinLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescipcion"
+            app:layout_constraintStart_toEndOf="@+id/imgClima"
+            app:layout_constraintEnd_toStartOf="@+id/txtTempMin"
+            android:text="Min: "/>
+        <TextView
+            android:id="@+id/txtTempMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescipcion"
+            app:layout_constraintStart_toEndOf="@+id/txtTempMinLabel"
+            app:layout_constraintEnd_toStartOf="@+id/txtTempMaxLabel"
+            android:text="@{ConverterKt.doubleToString(ciudad.tempMin)}"/>
+        <TextView
+            android:id="@+id/txtTempMaxLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescipcion"
+            app:layout_constraintStart_toEndOf="@+id/txtTempMin"
+            app:layout_constraintEnd_toStartOf="@+id/txtTempMax"
+            android:text="Max: "/>
+        <TextView
+            android:id="@+id/txtTempMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintBottom_toTopOf="@+id/txtDescipcion"
+            app:layout_constraintStart_toEndOf="@+id/txtTempMaxLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{ConverterKt.doubleToString(ciudad.tempMax)}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

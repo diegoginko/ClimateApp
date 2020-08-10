@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cimapp_navigation"
+    app:startDestination="@+id/climaActualFragment">
+    <fragment
+        android:id="@+id/climaActualFragment"
+        android:name="com.diegoginko.climapp.ui.climaActual.ClimaActualFragment"
+        android:label="clima_actual_fragment"
+        tools:layout="@layout/clima_actual_fragment" >
+        <action
+            android:id="@+id/action_climaActualFragment_to_pronosticoExtendidoFragment"
+            app:destination="@id/pronosticoExtendidoFragment"
+            app:popUpTo="@id/climaActualFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pronosticoExtendidoFragment"
+        android:name="com.diegoginko.climapp.ui.pronosticoExtendido.PronosticoExtendidoFragment"
+        android:label="PronosticoExtendidoFragment" >
+        <argument
+            android:name="ciudadSeleccionada"
+            app:argType="com.diegoginko.climapp.data.Ciudad"/>
+        <action
+            android:id="@+id/action_pronosticoExtendidoFragment_to_climaActualFragment"
+            app:destination="@id/climaActualFragment"
+            app:popUpTo="@id/climaActualFragment" />
+    </fragment>
+</navigation>
