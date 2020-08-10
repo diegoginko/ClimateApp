@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.diegoginko.climapp.utilities.ConverterKt" />
+        <variable
+            name="extendido"
+            type="com.diegoginko.climapp.network.Extendido" />
+        <variable
+            name="clickListener"
+            type="com.diegoginko.climapp.adapter.ExtendidoClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtDia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{ConverterKt.dtToDow(extendido.dt)}"/>
+        <ImageView
+            android:id="@+id/imgClima"
+            android:layout_width="0dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="@+id/txtDia"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:imageUrl="@{ConverterKt.iconToUri(extendido.weather[0].icon)}"/>
+        <TextView
+            android:id="@+id/txtTempTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/imgClima"
+            app:layout_constraintStart_toEndOf="@id/imgClima"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Temperatura"/>
+        <TextView
+            android:id="@+id/txtTempLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTempTitulo"
+            app:layout_constraintStart_toEndOf="@id/imgClima"
+            app:layout_constraintEnd_toStartOf="@+id/txtTemp"
+            android:text="Media: "/>
+        <TextView
+            android:id="@+id/txtTemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTempTitulo"
+            app:layout_constraintStart_toEndOf="@+id/txtTempLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{ConverterKt.doubleToString(extendido.main.temp)}"/>
+        <TextView
+            android:id="@+id/txtTempMinLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintStart_toEndOf="@id/imgClima"
+            app:layout_constraintEnd_toStartOf="@+id/txtTempMin"
+            android:text="Min: "/>
+        <TextView
+            android:id="@+id/txtTempMin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintStart_toEndOf="@id/imgClima"
+            app:layout_constraintEnd_toStartOf="@+id/txtTempMaxLabel"
+            android:text="@{ConverterKt.doubleToString(extendido.main.temp_min)}"/>
+        <TextView
+            android:id="@+id/txtTempMaxLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintStart_toEndOf="@+id/txtTempMin"
+            app:layout_constraintEnd_toStartOf="@+id/txtTempMax"
+            android:text="Max: "/>
+        <TextView
+            android:id="@+id/txtTempMax"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/txtTemp"
+            app:layout_constraintStart_toEndOf="@+id/txtTempMaxLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{ConverterKt.doubleToString(extendido.main.temp_max)}"/>
+        <TextView
+            android:id="@+id/txtDescipcion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/imgClima"
+            app:layout_constraintStart_toStartOf="@+id/imgClima"
+            app:layout_constraintEnd_toEndOf="@+id/imgClima"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{extendido.weather[0].description}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
