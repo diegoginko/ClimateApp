@@ -10,7 +10,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.openweathermap.org/"
-//const val API_KEY = "292e083757d3e7dc67b20073e19185cc"
 const val API_KEY = "6d34fa3aa74200ef5a512bd5e8966d24"
 
 private val moshi = Moshi.Builder()
